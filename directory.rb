@@ -21,6 +21,7 @@ def print_header
   puts   "The students of Villains Academy"
   puts "-------------"
 end
+# somthing
 def print(students)
   students.each_with_index do |student, index|
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
