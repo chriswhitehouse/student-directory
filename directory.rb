@@ -30,7 +30,7 @@ def print(students)
   count = 0
   while !students[count].nil? do
     if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
-      puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort) (Favourite hobby: #{students[count][:hobby]})"
+      puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort) (Favourite hobby: #{students[count][:hobby]})".center(140)
     end
     count += 1
   end
