@@ -23,10 +23,12 @@ def print_header
 end
 # somthing
 def print(students)
-  students.each_with_index do |student, index|
-    if student[:name][0].downcase == "c" && student[:name].length < 12 then
-      puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  count = 0
+  while !students[count].nil? do
+    if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
+      puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)"
     end
+    count += 1
   end
 end
 def print_footer(names)
