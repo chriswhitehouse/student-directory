@@ -1,7 +1,8 @@
-@students = [] # an empty array accessible to all methods
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
+  # create an empty array
+  students = []
   # get the first name
   name = gets.delete("\n")
   # while the name is not empty, repeat this code
@@ -17,13 +18,13 @@ def input_students
     hobby = gets.chomp
 
     # add the student hash to the array
-    @students << {name: name, cohort: cohort, hobby: hobby}
-    puts "Now we have #{@students.count} students"
+    students << {name: name, cohort: cohort, hobby: hobby}
+    puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
   end
   # return the array of students
-  @students
+  students
 end
 
 def print_header
@@ -31,13 +32,13 @@ def print_header
   puts "-------------".center(140)
 end
 # somthing
-def print_students_list
+def print(students)
   # find distinct cohorts
-  if @students.empty? then
+  if students.empty? then
     return
   else
     cohorts = []
-    @students.map { |student| if !cohorts.include?(student[:cohort]) then cohorts << student[:cohort] end }
+    students.map { |student| if !cohorts.include?(student[:cohort]) then cohorts << student[:cohort] end }
 
       # iterate over cohorts array
       cohorts.each do |cohort|
@@ -46,7 +47,7 @@ def print_students_list
         count = 0
         # while !students[count].nil? do
         # if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
-        @students.each do |student|
+        students.each do |student|
           if cohort == student[:cohort]
             puts "#{count+1}. #{student[:name]} (#{student[:cohort]} cohort) (Favourite hobby: #{student[:hobby]})".center(140)
             count += 1
@@ -56,16 +57,22 @@ def print_students_list
     end
 end
 
-def print_footer
-  @students.length > 1 ? plural_string = "s" : plural_string = ""
-  puts "Overall, we have #{@students.count} great student#{plural_string}".center(140)
+def print_footer(names)
+  names.length > 1 ? plural_string = "s" : plural_string = ""
+  puts "Overall, we have #{names.count} great student#{plural_string}".center(140)
 end
 
 def interactive_menu
+  students = []
   loop do
-    print_menu
-    process(gets.chomp)
+    # 1. print the menu and ask the user what to do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit" # 9 because we'll be adding more items
+    # 2. read the input and save it into a variable
+    selection = gets.chomp
     # 3. do what the user has asked
+<<<<<<< HEAD
   end
 end
 
@@ -98,6 +105,22 @@ def process(selection)
       exit # this will casue the program to terminate
     else
       puts "I don't know what you meant, try again"
+=======
+    case selection
+      when "1"
+        # input the students
+        students = input_students
+        print(students)
+        print_footer(students)
+      when "2"
+        # show the students
+        print_header
+      when "9"
+        exit # this will casue the program to terminate
+      else
+        puts "I don't know what you meant, try again"
+    end
+>>>>>>> parent of b15b827... Step 10: more refactoring of interactive menu
   end
 end
 
