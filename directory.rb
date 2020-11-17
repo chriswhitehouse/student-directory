@@ -72,7 +72,6 @@ def interactive_menu
     # 2. read the input and save it into a variable
     selection = gets.chomp
     # 3. do what the user has asked
-<<<<<<< HEAD
   end
 end
 
@@ -81,6 +80,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the lost from students.csv"
   puts "9. Exit" # 9 because we'll be adding more items
   # 2. read the input and save it into a variable
 end
@@ -101,26 +101,12 @@ def process(selection)
       show_students
     when "3"
       save_students
+    when "4"
+      load_students
     when "9"
       exit # this will casue the program to terminate
     else
       puts "I don't know what you meant, try again"
-=======
-    case selection
-      when "1"
-        # input the students
-        students = input_students
-        print(students)
-        print_footer(students)
-      when "2"
-        # show the students
-        print_header
-      when "9"
-        exit # this will casue the program to terminate
-      else
-        puts "I don't know what you meant, try again"
-    end
->>>>>>> parent of b15b827... Step 10: more refactoring of interactive menu
   end
 end
 
@@ -132,6 +118,15 @@ def save_students
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts(csv_line)
+  end
+  file.close
+end
+
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, cohort = line.chomp.split(",")
+      @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
