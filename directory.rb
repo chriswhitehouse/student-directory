@@ -53,7 +53,8 @@ def print(students)
   end
 end
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students".center(140)
+  names.length > 1 ? plural_string = "s" : plural_string = ""
+  puts "Overall, we have #{names.count} great student#{plural_string}".center(140)
 end
 # nothing happens until we call the methods
 students = input_students
