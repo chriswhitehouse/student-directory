@@ -28,21 +28,32 @@ def input_students
 end
 
 def print_header
-  puts   "The students of Villains Academy"
-  puts "-------------"
+  puts   "The students of Villains Academy".center(140)
+  puts "-------------".center(140)
 end
 # somthing
 def print(students)
-  count = 0
-  while !students[count].nil? do
-    if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
-      puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort) (Favourite hobby: #{students[count][:hobby]})".center(140)
+  # find distinct cohorts
+  cohorts = []
+  students.map { |student| if !cohorts.include?(student[:cohort]) then cohorts << student[:cohort] end }
+
+  # iterate over cohorts array
+  cohorts.each do |cohort|
+    puts ""
+    puts cohort.to_s.center(140)
+    count = 0
+  # while !students[count].nil? do
+    # if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
+    students.each do |student|
+      if cohort == student[:cohort]
+        puts "#{count+1}. #{student[:name]} (#{student[:cohort]} cohort) (Favourite hobby: #{student[:hobby]})".center(140)
+        count += 1
+      end
     end
-    count += 1
   end
 end
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(140)
 end
 # nothing happens until we call the methods
 students = input_students
