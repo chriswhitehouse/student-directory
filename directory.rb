@@ -34,24 +34,29 @@ end
 # somthing
 def print(students)
   # find distinct cohorts
-  cohorts = []
-  students.map { |student| if !cohorts.include?(student[:cohort]) then cohorts << student[:cohort] end }
+  if students.empty? then
+    return
+  else
+    cohorts = []
+    students.map { |student| if !cohorts.include?(student[:cohort]) then cohorts << student[:cohort] end }
 
-  # iterate over cohorts array
-  cohorts.each do |cohort|
-    puts ""
-    puts cohort.to_s.center(140)
-    count = 0
-  # while !students[count].nil? do
-    # if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
-    students.each do |student|
-      if cohort == student[:cohort]
-        puts "#{count+1}. #{student[:name]} (#{student[:cohort]} cohort) (Favourite hobby: #{student[:hobby]})".center(140)
-        count += 1
+      # iterate over cohorts array
+      cohorts.each do |cohort|
+        puts ""
+        puts cohort.to_s.center(140)
+        count = 0
+        # while !students[count].nil? do
+        # if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
+        students.each do |student|
+          if cohort == student[:cohort]
+            puts "#{count+1}. #{student[:name]} (#{student[:cohort]} cohort) (Favourite hobby: #{student[:hobby]})".center(140)
+            count += 1
+          end
+        end
       end
     end
-  end
 end
+
 def print_footer(names)
   names.length > 1 ? plural_string = "s" : plural_string = ""
   puts "Overall, we have #{names.count} great student#{plural_string}".center(140)
