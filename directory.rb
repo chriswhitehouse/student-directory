@@ -19,7 +19,7 @@ def input_students
     #hobby = gets.chomp
 
     # add the student hash to the array
-    @students << {name: name, cohort: cohort}
+    add_student(name, cohort)
     puts "Now we have #{@students.count} students"
     # get another name from the user
     name = STDIN.gets.chomp
@@ -29,8 +29,8 @@ def input_students
 end
 
 def print_header
-  puts   "The students of Villains Academy".center(140)
-  puts "-------------".center(140)
+  puts   "The students of Villains Academy".center(60)
+  puts "-------------".center(60)
 end
 # somthing
 def print_students_list
@@ -44,13 +44,13 @@ def print_students_list
       # iterate over cohorts array
       cohorts.each do |cohort|
         puts ""
-        puts cohort.to_s.center(140)
+        puts cohort.to_s.center(60)
         count = 0
         # while !students[count].nil? do
         # if students[count][:name][0].downcase == "c" && students[count][:name].length < 12 then
         @students.each do |student|
           if cohort == student[:cohort]
-            puts "#{count+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(140)
+            puts "#{count+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
             count += 1
           end
         end
@@ -60,7 +60,7 @@ end
 
 def print_footer
   @students.length > 1 ? plural_string = "s" : plural_string = ""
-  puts "Overall, we have #{@students.count} great student#{plural_string}".center(140)
+  puts "Overall, we have #{@students.count} great student#{plural_string}".center(60)
 end
 
 def interactive_menu
@@ -125,7 +125,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
-      @students << {name: name, cohort: cohort.to_sym}
+    add_student(name, cohort)
   end
   file.close
 end
@@ -141,6 +141,11 @@ def try_load_students
     exit # quit the program
   end
 end
+
+def add_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 
 try_load_students
 interactive_menu
