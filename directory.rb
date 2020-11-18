@@ -68,6 +68,7 @@ end
 
 def print_footer
   @students.length > 1 ? plural_string = "s" : plural_string = ""
+  puts ""
   puts "Overall, we have #{@students.count} great student#{plural_string}".center(60)
   puts ""
 end
@@ -122,7 +123,9 @@ def save_students
     csv_line = student_data.join(",")
     file.puts(csv_line)
   end
+  puts "Student list saved to #{file.path}"
   file.close
+
 end
 
 
